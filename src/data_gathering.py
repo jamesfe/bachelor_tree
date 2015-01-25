@@ -79,9 +79,16 @@ def individual_extract(pfile_name):
     try:
         num_tats = int(txt_num_tats)
     except:
+        # TODO: work on NLP'ing the text to numbers
         num_tats = 0
 
     print num_tats
+
+    likes = BeautifulSoup(item_list[5]).text.split(":")[1].split(",")
+    ret_vals['likes'] = [str(_) for _ in likes]
+
+    print item_list[6]
+
 
     return ret_vals
 

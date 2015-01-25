@@ -57,13 +57,32 @@ def individual_extract(pfile_name):
     prof_photo = bs.find("div", class_="info").find("img")
     ret_vals['photo_url'] = prof_photo['src']
 
-    # print descript
     item_list = str(descript).split("<br/>")
     ret_vals['age'] = item_list[0].strip()[-2:]
 
+    occ_html = BeautifulSoup(item_list[1])
+    ret_vals['occupation'] = occ_html.text.split(":")[1].strip()
 
-    # print item_list[1]
-    print ret_vals
+    hometown_html = BeautifulSoup(item_list[2])
+    hometown = hometown_html.text.split(":")[1].strip().split(",")
+    ret_vals['hometown_name'] = hometown[0]
+    try:
+        ret_vals['hometown_state'] = hometown[1]
+    except:
+        ret_vals['hometown_state'] = 'UNK'
+
+    height = BeautifulSoup(item_list[3]).text.split(":")[1].replace('"', '').split("'")
+    height_inches = int(height[0]) * 12 + int(height[1])
+    ret_vals['height_inches'] = height_inches
+
+    txt_num_tats = BeautifulSoup(item_list[4]).text.split(":")[1].strip()
+    try:
+        num_tats = int(txt_num_tats)
+    except:
+        num_tats = 0
+
+    print num_tats
+
     return ret_vals
 
 

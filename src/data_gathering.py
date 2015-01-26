@@ -9,6 +9,34 @@ import pickle
 from os.path import join
 
 PICKLEDIR = "../pickles/"
+IMAGEDIR = "../images/"
+
+
+def convert_text_to_num(text):
+    """
+    convert a word of text to a number
+    :param text: text of a number
+    :return:
+    """
+    conversion = dict({"none": 0,
+                       "zero": 0,
+                       "one": 1,
+                       "two": 2,
+                       "three": 3,
+                       "four": 4,
+                       "five": 5,
+                       "six": 6,
+                       "seven": 7,
+                       "eight": 8,
+                       "nine": 9,
+                       "ten": 10,
+                       "eleven": 11,
+                       "twelve": 12})
+    try:
+        ret_val = conversion[text.strip().lower()]
+    except KeyError:
+        ret_val = -1
+    return ret_val
 
 
 def pickle_indiv_pages(url, ofile):
@@ -42,19 +70,19 @@ def individual_extract(pfile_name):
 
     ret_vals = dict()
 
-    bs = BeautifulSoup(in_dat['content'])
-    descript = bs.find("div", class_='descriptionBody')
-    status = bs.find("h2", class_='itemMeta').text.split(" - ")
+    data_soup = BeautifulSoup(in_dat['content'])
+    descript = data_soup.find("div", class_='descriptionBody')
+    status = data_soup.find("h2", class_='itemMeta').text.split(" - ")
     if len(status) == 2:
         ret_vals['eliminated'] = True
         ret_vals['goneweek'] = int(status[1].strip()[-1:])
     else:
         ret_vals['eliminated'] = False
 
-    name = bs.find("h1", class_='title').text
+    name = data_soup.find("h1", class_='title').text
     ret_vals['name'] = name.strip()
 
-    prof_photo = bs.find("div", class_="info").find("img")
+    prof_photo = data_soup.find("div", class_="imageContainer").find("img")
     ret_vals['photo_url'] = prof_photo['src']
 
     item_list = str(descript).split("<br/>")
@@ -68,7 +96,7 @@ def individual_extract(pfile_name):
     ret_vals['hometown_name'] = hometown[0]
     try:
         ret_vals['hometown_state'] = hometown[1]
-    except:
+    except IndexError:
         ret_vals['hometown_state'] = 'UNK'
 
     height = BeautifulSoup(item_list[3]).text.split(":")[1].replace('"', '').split("'")
@@ -78,20 +106,20 @@ def individual_extract(pfile_name):
     txt_num_tats = BeautifulSoup(item_list[4]).text.split(":")[1].strip()
     try:
         num_tats = int(txt_num_tats)
-    except:
-        # TODO: work on NLP'ing the text to numbers
-        num_tats = 0
+    except ValueError:
+        num_tats = convert_text_to_num(txt_num_tats)
 
-    print num_tats
+    ret_vals['num_tattoos'] = num_tats
 
     likes = BeautifulSoup(item_list[5]).text.split(":")[1].split(",")
     ret_vals['likes'] = [str(_) for _ in likes]
 
-    print item_list[6]
+    datefear = BeautifulSoup(item_list[6]).text.split(":")[1]
+    ret_vals['date_fear'] = datefear
 
+    ret_vals['free_text'] = BeautifulSoup(' '.join(item_list[7:]))
 
     return ret_vals
-
 
 
 def get_main_links():
@@ -106,8 +134,8 @@ def get_main_links():
 
     ret_data = list()
 
-    for p in profiles:
-        cast_link = p['href']
+    for profile in profiles:
+        cast_link = profile['href']
         if cast_link.find("cast/19-") > -1:
             ret_data.append(cast_link)
     return ret_data
@@ -126,9 +154,36 @@ def gather_all_pages():
         pickle_indiv_pages(link, newfile)
 
 
+def download_images(in_dat_dict):
+    """
+    takes a data dict from individual_extract() and downloads the images to a folder
+    :param in_dat_dict:
+    :return:
+    """
+    for index, item in enumerate(in_dat_dict):
+        print item['photo_url']
+        req = requests.get(item['photo_url'], stream=True)
+        fname = join(IMAGEDIR, str(index) + "_img.png")
+        with open(fname, 'wb') as stream_file:
+            for chunk in req.iter_content():
+                stream_file.write(chunk)
+
+
+def parse_image_data_file(in_fname):
+    """
+    parse a custom-formatted file into a dict and return those values for joining
+    :param in_fname:
+    :return:
+    """
+    # TODO: Write this function.
+    pass
+
 if __name__ == '__main__':
-    # pf1 = join(PICKLEDIR, '0.pickle')
-    # individual_extract(pf1)
+    # pylint: disable=invalid-name
+    contestant_data = list()
     for i in range(0, 28):
         tgt_file = join(PICKLEDIR, str(i) + ".pickle")
-        individual_extract(tgt_file)
+        contestant_data.append(individual_extract(tgt_file))
+
+
+

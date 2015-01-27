@@ -10,6 +10,7 @@ from os.path import join
 
 PICKLEDIR = "../pickles/"
 IMAGEDIR = "../images/"
+DATADIR = "../data/"
 
 
 def convert_text_to_num(text):
@@ -175,15 +176,29 @@ def parse_image_data_file(in_fname):
     :param in_fname:
     :return:
     """
-    # TODO: Write this function.
-    pass
+    in_file = file(in_fname, 'r')
+
+    ret_vals = dict()
+    c_val = None
+    for line in in_file:
+        try:
+            c_val = int(line.strip())
+            ret_vals[c_val] = dict()
+        except ValueError:
+            objs = [_.strip() for _ in line.split(":")]
+            ret_vals[c_val][objs[0]] = objs[1]
+    return ret_vals
+
+    in_file.close()
 
 if __name__ == '__main__':
     # pylint: disable=invalid-name
-    contestant_data = list()
-    for i in range(0, 28):
-        tgt_file = join(PICKLEDIR, str(i) + ".pickle")
-        contestant_data.append(individual_extract(tgt_file))
+    # contestant_data = list()
+    # for i in range(0, 28):
+    #     tgt_file = join(PICKLEDIR, str(i) + ".pickle")
+    #     contestant_data.append(individual_extract(tgt_file))
+    joiners = parse_image_data_file(join(DATADIR, "image_data.dat"))
+    print joiners
 
 
 

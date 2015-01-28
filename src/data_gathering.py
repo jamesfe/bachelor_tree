@@ -7,6 +7,7 @@ import requests
 from selenium import webdriver
 import pickle
 from os.path import join
+import json
 
 PICKLEDIR = "../pickles/"
 IMAGEDIR = "../images/"
@@ -87,7 +88,7 @@ def individual_extract(pfile_name):
     ret_vals['photo_url'] = prof_photo['src']
 
     item_list = str(descript).split("<br/>")
-    ret_vals['age'] = item_list[0].strip()[-2:]
+    ret_vals['age'] = int(item_list[0].strip()[-2:])
 
     occ_html = BeautifulSoup(item_list[1])
     ret_vals['occupation'] = occ_html.text.split(":")[1].strip()
@@ -113,12 +114,12 @@ def individual_extract(pfile_name):
     ret_vals['num_tattoos'] = num_tats
 
     likes = BeautifulSoup(item_list[5]).text.split(":")[1].split(",")
-    ret_vals['likes'] = [str(_) for _ in likes]
+    ret_vals['likes'] = [str(_).strip() for _ in likes]
 
     datefear = BeautifulSoup(item_list[6]).text.split(":")[1]
     ret_vals['date_fear'] = datefear
 
-    ret_vals['free_text'] = BeautifulSoup(' '.join(item_list[7:]))
+    ret_vals['free_text'] = BeautifulSoup(' '.join(item_list[7:])).text
 
     return ret_vals
 
@@ -191,14 +192,30 @@ def parse_image_data_file(in_fname):
 
     in_file.close()
 
-if __name__ == '__main__':
-    # pylint: disable=invalid-name
-    # contestant_data = list()
-    # for i in range(0, 28):
-    #     tgt_file = join(PICKLEDIR, str(i) + ".pickle")
-    #     contestant_data.append(individual_extract(tgt_file))
-    joiners = parse_image_data_file(join(DATADIR, "image_data.dat"))
-    print joiners
 
+def scrape_to_json(f_out):
+    """
+    scrape data to a json file
+    :return:
+    """
+    # pylint: disable=invalid-name
+    contestant_data = list()
+    for i in range(0, 28):
+        tgt_file = join(PICKLEDIR, str(i) + ".pickle")
+        contestant_data.append(individual_extract(tgt_file))
+
+    joiners = parse_image_data_file(join(DATADIR, "image_data.dat"))
+
+    final_data = list()
+    for i in range(0, len(joiners)):
+        final_data.append(dict(joiners[i].items() + contestant_data[i].items()))
+
+    json_out = file(f_out, 'w')
+    json_out.write(json.dumps(final_data, indent=4, separators=(',', ': ')))
+    json_out.close()
+
+
+if __name__ == '__main__':
+    scrape_to_json("contestants_27jan2015.json")
 
 

@@ -6,6 +6,41 @@ from sklearn import tree
 import json
 
 
+def textvals_to_numbers(in_vals):
+    """
+    hair length
+    :param in_vals: dictionary of attributes and text values
+    :return:
+    """
+    hair_length = dict({"neck": 1,
+                        "shoulder": 2,
+                        "chest": 3,
+                        "stomach": 4})
+
+    hair_color = dict({"light": 1,
+                       "medium": 2,
+                       "mixed": 3,
+                       "medium-dark": 4,
+                       "dark": 5})
+
+    hair_wavy = dict({"straight": 1,
+                      "straight-medium": 2,
+                      "medium": 3,
+                      "curly-medium": 4,
+                      "curly": 5})
+
+    ethnicity = dict({"asian": 1,
+                      "caucasian": 2,
+                      "african-american": 3})
+
+    ret_data = dict({"ethnicity": ethnicity[in_vals['ethnicity']],
+                     "hair_color": hair_color[in_vals['hair_color']],
+                     "hair_length": hair_length[in_vals['hair_length']],
+                     "hair_wavy": hair_wavy[in_vals['hair_wavy']]})
+
+    return ret_data
+
+
 def data_formatter(in_file):
     """
     do stuff

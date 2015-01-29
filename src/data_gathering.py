@@ -206,13 +206,18 @@ def scrape_to_json(f_out):
 
     joiners = parse_image_data_file(join(DATADIR, "image_data.dat"))
 
+    hl_set = set()
+
     final_data = list()
     for i in range(0, len(joiners)):
         final_data.append(dict(joiners[i].items() + contestant_data[i].items()))
+        hl_set.add(joiners[i]['ethnicity'])
 
-    json_out = file(f_out, 'w')
-    json_out.write(json.dumps(final_data, indent=4, separators=(',', ': ')))
-    json_out.close()
+    print hl_set
+
+    # json_out = file(f_out, 'w')
+    # json_out.write(json.dumps(final_data, indent=4, separators=(',', ': ')))
+    # json_out.close()
 
 
 if __name__ == '__main__':

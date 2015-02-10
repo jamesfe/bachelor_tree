@@ -1,9 +1,10 @@
 """
-I mean, we can only really call this a guesser.  Let's categorize some contestants.
+We can only really call this a guesser.  Let's categorize some contestants.
 """
 
 from sklearn import tree
 import json
+from collections import OrderedDict
 
 
 def textvals_to_numbers(in_vals):
@@ -33,10 +34,11 @@ def textvals_to_numbers(in_vals):
                       "caucasian": 2,
                       "african-american": 3})
 
-    ret_data = dict({"ethnicity": ethnicity[in_vals['ethnicity']],
-                     "hair_color": hair_color[in_vals['hair_color']],
-                     "hair_length": hair_length[in_vals['hair_length']],
-                     "hair_wavy": hair_wavy[in_vals['hair_wavy']]})
+    ret_data = OrderedDict({"ethnicity": ethnicity[in_vals['ethnicity']],
+                            "hair_color": hair_color[in_vals['hair_color']],
+                            "hair_length": hair_length[in_vals['hair_length']],
+                            "hair_wavy": hair_wavy[in_vals['hair_wavy']],
+                            "age": in_vals['age']})
 
     return ret_data
 
@@ -50,27 +52,40 @@ def data_formatter(in_file):
     in_json = json.load(file_p)
     file_p.close()
 
-    print in_json
+    num_vals = dict()
+    for item in in_json:
+        if item['eliminated']:
+            elim = 1
+        else:
+            elim = 0
+        in_vals = textvals_to_numbers(item)
+        num_vals[item['name']] = [in_vals.values(), elim]
 
-    ret_vals = list()
-    ## a list of lists: each of which is a classified value and a set of numerical features
-    ## i.e. [ [1, [2,3,4,5] ], [0, [2,3,4,3] ] ] where 1 is stays and 0 is goes (or vice versa)
-
-    #TODO: Convert inputs to numbers.
-    # categories?  or is everything continuous?
-
-    return ret_vals
+    return num_vals
 
 
 if __name__ == "__main__":
     tgt_file = "../feature_data/contestants_27jan2015.json"
-    learn_values= data_formatter(tgt_file)
+    learn_values = data_formatter(tgt_file)
+
+    x = list()
+    y = list()
+
+    for index, item in enumerate(learn_values.values()):
+        x.append(item[0])
+        y.append(item[1])
+        if index > len(learn_values)*0.3:
+            break
+
+    print x, y
+
 
     # These next two lines courtesy of:
     # http://scikit-learn.org/stable/modules/tree.html
     clf = tree.DecisionTreeClassifier()
-    clf = clf.fit(X, Y)
+    clf = clf.fit(x, y)
 
-    # clf.predict( some values here )
+    for item in learn_values:
+        print item, clf.predict(learn_values[item][0]), learn_values[item][1]
 
     ## some awesome output code here

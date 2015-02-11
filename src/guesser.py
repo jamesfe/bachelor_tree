@@ -53,19 +53,19 @@ def data_formatter(in_file):
     file_p.close()
 
     num_vals = dict()
-    for item in in_json:
-        if item['eliminated']:
+    for indiv in in_json:
+        if indiv['eliminated']:
             elim = 1
         else:
             elim = 0
-        in_vals = textvals_to_numbers(item)
-        num_vals[item['name']] = [in_vals.values(), elim]
+        in_vals = textvals_to_numbers(indiv)
+        num_vals[indiv['name']] = [in_vals.values(), elim]
 
     return num_vals
 
 
 if __name__ == "__main__":
-    tgt_file = "../feature_data/contestants_27jan2015.json"
+    TGT_FILE = "../feature_data/contestants_27jan2015.json"
     learn_values = data_formatter(tgt_file)
 
     x = list()
@@ -74,11 +74,10 @@ if __name__ == "__main__":
     for index, item in enumerate(learn_values.values()):
         x.append(item[0])
         y.append(item[1])
-        if index > len(learn_values)*0.3:
+        if index > len(learn_values) * 0.3:
             break
 
     print x, y
-
 
     # These next two lines courtesy of:
     # http://scikit-learn.org/stable/modules/tree.html
@@ -87,5 +86,3 @@ if __name__ == "__main__":
 
     for item in learn_values:
         print item, clf.predict(learn_values[item][0]), learn_values[item][1]
-
-    ## some awesome output code here

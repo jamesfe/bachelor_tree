@@ -188,9 +188,9 @@ def parse_image_data_file(in_fname):
         except ValueError:
             objs = [_.strip() for _ in line.split(":")]
             ret_vals[c_val][objs[0]] = objs[1]
-    return ret_vals
 
     in_file.close()
+    return ret_vals
 
 
 def scrape_to_json(f_out):
@@ -215,12 +215,13 @@ def scrape_to_json(f_out):
 
     print hl_set
 
-    # json_out = file(f_out, 'w')
-    # json_out.write(json.dumps(final_data, indent=4, separators=(',', ': ')))
-    # json_out.close()
+    json_out = file(f_out, 'w')
+    json_out.write(json.dumps(final_data, indent=4, separators=(',', ': ')))
+    json_out.close()
 
 
 if __name__ == '__main__':
-    scrape_to_json("contestants_27jan2015.json")
+    # scrape_to_json("contestants_27jan2015.json")
+    scrape_to_json("contestants_10feb2015.json")
 
 

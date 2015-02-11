@@ -38,7 +38,8 @@ def textvals_to_numbers(in_vals):
                             "hair_color": hair_color[in_vals['hair_color']],
                             "hair_length": hair_length[in_vals['hair_length']],
                             "hair_wavy": hair_wavy[in_vals['hair_wavy']],
-                            "age": in_vals['age']})
+                            "age": in_vals['age'],
+                            "tattoos": in_vals['num_tattoos']})
 
     return ret_data
 
@@ -65,8 +66,8 @@ def data_formatter(in_file):
 
 
 if __name__ == "__main__":
-    TGT_FILE = "../feature_data/contestants_27jan2015.json"
-    learn_values = data_formatter(tgt_file)
+    TGT_FILE = "../feature_data/contestants_11feb2015.json"
+    learn_values = data_formatter(TGT_FILE)
 
     x = list()
     y = list()
@@ -83,6 +84,11 @@ if __name__ == "__main__":
     # http://scikit-learn.org/stable/modules/tree.html
     clf = tree.DecisionTreeClassifier()
     clf = clf.fit(x, y)
-
+    c = 0
     for item in learn_values:
-        print item, clf.predict(learn_values[item][0]), learn_values[item][1]
+
+        if clf.predict(learn_values[item][0]) != learn_values[item][1]:
+            c += 1
+            if learn_values[item][1] == 0:  # if they aren't eliminated
+                print item
+    print c, len(learn_values)

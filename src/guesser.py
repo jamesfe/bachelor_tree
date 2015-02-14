@@ -5,6 +5,7 @@ We can only really call this a guesser.  Let's categorize some contestants.
 from sklearn import tree
 import json
 from collections import OrderedDict
+import random
 
 
 def textvals_to_numbers(in_vals):
@@ -44,7 +45,7 @@ def textvals_to_numbers(in_vals):
     return ret_data
 
 
-def data_formatter(in_file):
+def data_formatter(in_file, eliminations, week):
     """
     do stuff
     :return:
@@ -55,10 +56,12 @@ def data_formatter(in_file):
 
     num_vals = dict()
     for indiv in in_json:
-        if indiv['eliminated']:
-            elim = 1
-        else:
-            elim = 0
+        elim = 0
+
+        for i in range(1, week + 1):
+            k = str(i)
+            if indiv['name'] in eliminations[k]:
+                elim = 1
         in_vals = textvals_to_numbers(indiv)
         num_vals[indiv['name']] = [in_vals.values(), elim]
 
@@ -66,29 +69,39 @@ def data_formatter(in_file):
 
 
 if __name__ == "__main__":
+    elims = json.load(file('../feature_data/eliminations.json', 'r'))
+
     TGT_FILE = "../feature_data/contestants_11feb2015.json"
-    learn_values = data_formatter(TGT_FILE)
 
-    x = list()
-    y = list()
+    for week in range(1, 6):
+        print "Making predictions for week ", week
+        learn_values = data_formatter(TGT_FILE, elims, 1)
 
-    for index, item in enumerate(learn_values.values()):
-        x.append(item[0])
-        y.append(item[1])
-        if index > len(learn_values) * 0.3:
-            break
+        x = list()
+        y = list()
 
-    print x, y
+        samples = set()
+        while len(samples) < (len(learn_values) * 0.3):
+            samples.add(random.randint(0, len(learn_values) - 1))
 
-    # These next two lines courtesy of:
-    # http://scikit-learn.org/stable/modules/tree.html
-    clf = tree.DecisionTreeClassifier()
-    clf = clf.fit(x, y)
-    c = 0
-    for item in learn_values:
+        learn_arr = learn_values.values()
+        print len(learn_arr)
+        print "Sample selection: ", samples
+        for index in samples:
+            x.append(learn_arr[index][0])
+            y.append(learn_arr[index][1])
 
-        if clf.predict(learn_values[item][0]) != learn_values[item][1]:
-            c += 1
-            if learn_values[item][1] == 0:  # if they aren't eliminated
-                print item
-    print c, len(learn_values)
+        print x, y
+
+        # These next two lines courtesy of:
+        # http://scikit-learn.org/stable/modules/tree.html
+        clf = tree.DecisionTreeClassifier()
+        clf = clf.fit(x, y)
+        c = 0
+        for item in learn_values:
+            if clf.predict(learn_values[item][0]) != learn_values[item][1]:
+                c += 1
+                if learn_values[item][1] == 0:  # if they aren't eliminated
+                    print item
+
+        print c, len(learn_values)

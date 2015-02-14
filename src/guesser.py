@@ -45,7 +45,7 @@ def textvals_to_numbers(in_vals):
     return ret_data
 
 
-def data_formatter(in_file, eliminations, week):
+def data_formatter(in_file, eliminations, tgt_week):
     """
     do stuff
     :return:
@@ -57,7 +57,7 @@ def data_formatter(in_file, eliminations, week):
     num_vals = dict()
     for indiv in in_json:
         elim = 0
-        for i in range(1, week + 1):
+        for i in range(1, tgt_week + 1):
             k = str(i)
             if indiv['name'] in eliminations[k]:
                 elim = 1
@@ -68,7 +68,7 @@ def data_formatter(in_file, eliminations, week):
 
 
 if __name__ == "__main__":
-    elims = json.load(file('../feature_data/eliminations.json', 'r'))
+    ELIMS = json.load(file('../feature_data/eliminations.json', 'r'))
 
     TGT_FILE = "../feature_data/contestants_11feb2015.json"
 
@@ -76,7 +76,7 @@ if __name__ == "__main__":
         print "==============================="
         print "Making predictions for week ", week
         print "==============================="
-        learn_values = data_formatter(TGT_FILE, elims, week)
+        learn_values = data_formatter(TGT_FILE, ELIMS, week)
 
         x = list()
         y = list()

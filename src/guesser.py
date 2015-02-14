@@ -2,7 +2,7 @@
 We can only really call this a guesser.  Let's categorize some contestants.
 """
 
-from sklearn import tree
+from sklearn import tree, svm
 import json
 from collections import OrderedDict
 import random
@@ -57,7 +57,6 @@ def data_formatter(in_file, eliminations, week):
     num_vals = dict()
     for indiv in in_json:
         elim = 0
-
         for i in range(1, week + 1):
             k = str(i)
             if indiv['name'] in eliminations[k]:
@@ -73,9 +72,11 @@ if __name__ == "__main__":
 
     TGT_FILE = "../feature_data/contestants_11feb2015.json"
 
-    for week in range(1, 6):
+    for week in range(1, 7):
+        print "==============================="
         print "Making predictions for week ", week
-        learn_values = data_formatter(TGT_FILE, elims, 1)
+        print "==============================="
+        learn_values = data_formatter(TGT_FILE, elims, week)
 
         x = list()
         y = list()
@@ -85,23 +86,24 @@ if __name__ == "__main__":
             samples.add(random.randint(0, len(learn_values) - 1))
 
         learn_arr = learn_values.values()
-        print len(learn_arr)
+
         print "Sample selection: ", samples
         for index in samples:
             x.append(learn_arr[index][0])
             y.append(learn_arr[index][1])
 
-        print x, y
-
         # These next two lines courtesy of:
         # http://scikit-learn.org/stable/modules/tree.html
-        clf = tree.DecisionTreeClassifier()
+        # clf = tree.DecisionTreeClassifier()
+        clf = svm.SVC()
         clf = clf.fit(x, y)
         c = 0
         for item in learn_values:
             if clf.predict(learn_values[item][0]) != learn_values[item][1]:
                 c += 1
                 if learn_values[item][1] == 0:  # if they aren't eliminated
-                    print item
+                    print "Going Home: ", item
 
-        print c, len(learn_values)
+
+        accuracy = round((len(learn_values)-c)/float(len(learn_values)) * 100, 2)
+        print "Incorrect out of total: ", c, len(learn_values), accuracy

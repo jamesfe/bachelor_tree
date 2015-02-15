@@ -7,6 +7,8 @@ import json
 from collections import OrderedDict
 import random
 
+MAXWEEK = 6
+
 
 def textvals_to_numbers(in_vals):
     """
@@ -40,20 +42,17 @@ def textvals_to_numbers(in_vals):
                             "hair_length": hair_length[in_vals['hair_length']],
                             "hair_wavy": hair_wavy[in_vals['hair_wavy']],
                             "age": in_vals['age'],
-                            "tattoos": in_vals['num_tattoos']})
+                            "tattoos": in_vals['num_tattoos'],
+                            "height": in_vals['height_inches']})
 
     return ret_data
 
 
-def data_formatter(in_file, eliminations, tgt_week):
+def data_formatter(in_json, eliminations, tgt_week):
     """
     do stuff
     :return:
     """
-    file_p = file(in_file, 'r')
-    in_json = json.load(file_p)
-    file_p.close()
-
     num_vals = dict()
     for indiv in in_json:
         elim = 0
@@ -67,43 +66,87 @@ def data_formatter(in_file, eliminations, tgt_week):
     return num_vals
 
 
+def week_predict(tgt_file, elims, tgt_week, sc_learn):
+    """
+    Given some data, make some predictions and return the average accuracy.
+    :param tgt_file: json
+    :param elims:
+    :param tgt_week:
+    :param sc_learn:
+    :return:
+    """
+
+    learn_values = data_formatter(tgt_file, elims, tgt_week)
+    x = list()
+    y = list()
+    samples = set()
+    while len(samples) < (len(learn_values) * 0.3):
+        samples.add(random.randint(0, len(learn_values) - 1))
+    learn_arr = learn_values.values()
+    # print "Sample selection: ", samples
+    for index in samples:
+        x.append(learn_arr[index][0])
+        y.append(learn_arr[index][1])
+
+    # These next two lines courtesy of:
+    # http://scikit-learn.org/stable/modules/tree.html
+    clf = sc_learn
+    try:
+        clf = clf.fit(x, y)
+    except ValueError:
+        # Sometimes we try to train with 0 classes.
+        return dict({"accuracy": 0, "departures": []})
+    c = 0
+    departures = list()
+    for item in learn_values:
+        if clf.predict(learn_values[item][0]) != learn_values[item][1]:
+            c += 1
+            if learn_values[item][1] == 0:  # if they aren't eliminated
+                departures.append(item)
+    accuracy = round((len(learn_values) - c) / float(len(learn_values)) * 100, 2)
+    ret_val = dict({"accuracy": accuracy,
+                    "departures": departures})
+    return ret_val
+
 if __name__ == "__main__":
     ELIMS = json.load(file('../feature_data/eliminations.json', 'r'))
+    TGT_FILE = json.load(file("../feature_data/contestants_11feb2015.json", 'r'))
 
-    TGT_FILE = "../feature_data/contestants_11feb2015.json"
+    # learner = tree.DecisionTreeClassifier()
+    learner = svm.SVC()
 
-    for week in range(1, 7):
-        print "==============================="
-        print "Making predictions for week ", week
-        print "==============================="
-        learn_values = data_formatter(TGT_FILE, ELIMS, week)
+    dt = dict()
 
-        x = list()
-        y = list()
+    tot_att = 5000
+    departure_count = dict()
+    for att in range(0, tot_att):
+        accs = list()
+        week = MAXWEEK
+        predict = week_predict(TGT_FILE, ELIMS, week, learner)
+        accs.append(predict['accuracy'])
+        for i in predict['departures']:
+            if i in departure_count:
+                departure_count[i] += 1
+            else:
+                departure_count[i] = 1
+        for indiv in TGT_FILE:
+            name = indiv['name']
+            if name not in dt:
+                dt[name] = [0]
+            # print indiv, predict['departures']
+            if name in predict['departures']:
+                dt[name].append(dt[name][-1] + 1)
+            else:
+                dt[name].append(dt[name][-1])
 
-        samples = set()
-        while len(samples) < (len(learn_values) * 0.3):
-            samples.add(random.randint(0, len(learn_values) - 1))
+    fp = file("csv_out.csv", 'w')
+    for indiv in dt:
+        fp.write(indiv + ", ")
+        for i in dt[indiv]:
+            fp.write(str(i) + ", ")
+        fp.write("\n")
+    fp.close()
 
-        learn_arr = learn_values.values()
-
-        print "Sample selection: ", samples
-        for index in samples:
-            x.append(learn_arr[index][0])
-            y.append(learn_arr[index][1])
-
-        # These next two lines courtesy of:
-        # http://scikit-learn.org/stable/modules/tree.html
-        # clf = tree.DecisionTreeClassifier()
-        clf = svm.SVC()
-        clf = clf.fit(x, y)
-        c = 0
-        for item in learn_values:
-            if clf.predict(learn_values[item][0]) != learn_values[item][1]:
-                c += 1
-                if learn_values[item][1] == 0:  # if they aren't eliminated
-                    print "Going Home: ", item
-
-
-        accuracy = round((len(learn_values)-c)/float(len(learn_values)) * 100, 2)
-        print "Incorrect out of total: ", c, len(learn_values), accuracy
+    print sum(accs) / len(accs)
+    for i in departure_count:
+        print "Departing: ", i + " votes: ", departure_count[i]

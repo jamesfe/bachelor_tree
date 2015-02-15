@@ -49,7 +49,8 @@ def textvals_to_numbers(in_vals):
                             "age": in_vals['age'],
                             "tattoos": in_vals['num_tattoos'],
                             "height": in_vals['height_inches'],
-                            "featured_num": feat_num})
+                            "featured_num": feat_num,
+                            "intro_order": in_vals['intro_order']})
 
     return ret_data
 

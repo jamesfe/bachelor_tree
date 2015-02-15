@@ -37,13 +37,19 @@ def textvals_to_numbers(in_vals):
                       "caucasian": 2,
                       "african-american": 3})
 
+    try:
+        feat_num = in_vals['featured_num']
+    except KeyError:
+        feat_num = -999
+
     ret_data = OrderedDict({"ethnicity": ethnicity[in_vals['ethnicity']],
                             "hair_color": hair_color[in_vals['hair_color']],
                             "hair_length": hair_length[in_vals['hair_length']],
                             "hair_wavy": hair_wavy[in_vals['hair_wavy']],
                             "age": in_vals['age'],
                             "tattoos": in_vals['num_tattoos'],
-                            "height": in_vals['height_inches']})
+                            "height": in_vals['height_inches'],
+                            "featured_num": feat_num})
 
     return ret_data
 
@@ -139,13 +145,13 @@ if __name__ == "__main__":
             else:
                 dt[name].append(dt[name][-1])
 
-    fp = file("csv_out.csv", 'w')
-    for indiv in dt:
-        fp.write(indiv + ", ")
-        for i in dt[indiv]:
-            fp.write(str(i) + ", ")
-        fp.write("\n")
-    fp.close()
+    # fp = file("csv_out.csv", 'w')
+    # for indiv in dt:
+    #     fp.write(indiv + ", ")
+    #     for i in dt[indiv]:
+    #         fp.write(str(i) + ", ")
+    #     fp.write("\n")
+    # fp.close()
 
     print sum(accs) / len(accs)
     for i in departure_count:

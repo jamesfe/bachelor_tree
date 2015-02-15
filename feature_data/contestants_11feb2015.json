@@ -22,7 +22,9 @@
         "photo_url": "http://static.east.abc.go.com/service/image/ratio/id/90fe9103-e788-418d-9eb1-4204b7ba1b96/dim/690.1x1.jpg?cb=51351345661",
         "hometown_state": " NJ",
         "ethnicity": "caucasian",
-        "goneweek": 2
+        "goneweek": 2,
+        "featured": true,
+        "featured_num": 6
     },
     {
         "hair_wavy": "straight-medium",
@@ -44,7 +46,9 @@
         "photo_url": "http://static.east.abc.go.com/service/image/ratio/id/5336c8d9-7f0f-4322-a708-e8e4974b26ec/dim/690.1x1.jpg",
         "hometown_state": " IL",
         "ethnicity": "caucasian",
-        "goneweek": 1
+        "goneweek": 1,
+        "featured": true,
+        "featured_num": 3
     },
     {
         "hair_wavy": "straight",
@@ -164,7 +168,9 @@
         "photo_url": "http://static.east.abc.go.com/service/image/ratio/id/e44ce80a-1d49-4d54-bc52-bc2b458ea0a2/dim/690.1x1.jpg",
         "hometown_state": " CA",
         "ethnicity": "asian",
-        "name": "Britt Nilsson"
+        "name": "Britt Nilsson",
+        "featured": true,
+        "featured_num": 1
     },
     {
         "hair_wavy": "medium",
@@ -261,7 +267,9 @@
         "photo_url": "http://static.east.abc.go.com/service/image/ratio/id/16cea051-ceac-492f-8f82-46b3ccd895a8/dim/690.16x9.jpg",
         "hometown_state": " DC",
         "ethnicity": "caucasian",
-        "name": "Jillian Anderson"
+        "name": "Jillian Anderson",
+        "featured": true,
+        "featured_num": 2
     },
     {
         "hair_wavy": "straight",
@@ -408,7 +416,9 @@
         "photo_url": "http://static.east.abc.go.com/service/image/ratio/id/c0a4edda-7d35-4f81-b08b-9a0b6f78de1e/dim/690.1x1.jpg",
         "hometown_state": " NY",
         "ethnicity": "caucasian",
-        "goneweek": 2
+        "goneweek": 2,
+        "featured": true,
+        "featured_num": 6
     },
     {
         "hair_wavy": "curly-medium",
@@ -431,7 +441,9 @@
         "photo_url": "http://static.east.abc.go.com/service/image/ratio/id/fd5722bd-2859-4386-8ca6-c24d3e57e8df/dim/690.1x1.jpg",
         "hometown_state": " WA",
         "ethnicity": "caucasian",
-        "name": "Mackenzie Deonigi"
+        "name": "Mackenzie Deonigi",
+        "featured": true,
+        "featured_num": 5
     },
     {
         "hair_wavy": "straight",
@@ -677,5 +689,36 @@
         "hometown_state": " CA",
         "ethnicity": "caucasian",
         "goneweek": 3
+    },
+    {
+        "hair_wavy": "medium",
+        "hometown_name": "Brooklyn",
+        "age": 24,
+        "height_inches": 67,
+        "num_tattoos": 0,
+        "hair_color": "light",
+        "eliminated": true,
+        "hometown_state": "NY",
+        "goneweek": 4,
+        "name": "Ashley Salter",
+        "ethnicity": "caucasian",
+        "hair_length": "chest"
+    },
+    {
+        "name": "Whitney Bischoff",
+        "hair_wavy": "medium",
+        "age": 29,
+        "height_inches": 67,
+        "hair_color": "light",
+        "hair_length": "chest",
+        "num_tattoos": 1,
+        "eliminated": false,
+        "hometown_name": "Chicago",
+        "ethnicity": "caucasian",
+        "hometown_state": "IL",
+        "featured": true,
+        "featured_num": 4
     }
+
+
 ]

@@ -6,6 +6,7 @@ from sklearn import tree, svm
 import json
 from collections import OrderedDict
 import random
+from operator import itemgetter
 
 MAXWEEK = 6
 
@@ -41,7 +42,7 @@ def textvals_to_numbers(in_vals):
         feat_num = in_vals['featured_num']
     except KeyError:
         feat_num = -999
-
+    
     ret_data = OrderedDict({"ethnicity": ethnicity[in_vals['ethnicity']],
                             "hair_color": hair_color[in_vals['hair_color']],
                             "hair_length": hair_length[in_vals['hair_length']],
@@ -50,7 +51,8 @@ def textvals_to_numbers(in_vals):
                             "tattoos": in_vals['num_tattoos'],
                             "height": in_vals['height_inches'],
                             "featured_num": feat_num,
-                            "intro_order": in_vals['intro_order']})
+                            "intro_order": in_vals['intro_order'],
+                            "pop_2013": in_vals['hometown_pop_2013']})
 
     return ret_data
 
@@ -73,21 +75,21 @@ def data_formatter(in_json, eliminations, tgt_week):
     return num_vals
 
 
-def week_predict(tgt_file, elims, tgt_week, sc_learn):
+def week_predict(tgt_data, elims, tgt_week, sc_learn):
     """
     Given some data, make some predictions and return the average accuracy.
-    :param tgt_file: json
-    :param elims:
+    :param tgt_data: json structure of data to be formatted
+    :param elims: eliminated
     :param tgt_week:
     :param sc_learn:
     :return:
     """
 
-    learn_values = data_formatter(tgt_file, elims, tgt_week)
+    learn_values = data_formatter(tgt_data, elims, tgt_week)
     x = list()
     y = list()
     samples = set()
-    while len(samples) < (len(learn_values) * 0.3):
+    while len(samples) < (len(learn_values) * 0.25):
         samples.add(random.randint(0, len(learn_values) - 1))
     learn_arr = learn_values.values()
     # print "Sample selection: ", samples
@@ -117,7 +119,7 @@ def week_predict(tgt_file, elims, tgt_week, sc_learn):
 
 if __name__ == "__main__":
     ELIMS = json.load(file('../feature_data/eliminations.json', 'r'))
-    TGT_FILE = json.load(file("../feature_data/contestants_11feb2015.json", 'r'))
+    TGT_FILE = json.load(file("../feature_data/contestants.json", 'r'))
 
     # learner = tree.DecisionTreeClassifier()
     learner = svm.SVC()
@@ -155,5 +157,7 @@ if __name__ == "__main__":
     # fp.close()
 
     print sum(accs) / len(accs)
-    for i in departure_count:
-        print "Departing: ", i + " votes: ", departure_count[i]
+    dc = sorted(zip(departure_count.keys(), departure_count.values()), key=itemgetter(1), reverse=True)
+
+    for i in dc:
+        print "Departing: ", i[0] + ": ", i[1]

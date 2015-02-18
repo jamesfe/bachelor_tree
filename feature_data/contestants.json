@@ -328,7 +328,9 @@
         "hometown_state": " CO",
         "ethnicity": "caucasian",
         "goneweek": 2,
-        "intro_order": 22
+        "intro_order": 22,
+        "hometown_pop_2010": 18762,
+        "hometown_pop_2013": 20422
     },
     {
         "hair_wavy": "straight",

@@ -25,7 +25,9 @@
         "goneweek": 2,
         "featured": true,
         "featured_num": 6,
-        "intro_order": 21
+        "intro_order": 21,
+        "hometown_pop_2010": 88464,
+        "hometown_pop_2013": 88919
     },
     {
         "hair_wavy": "straight-medium",
@@ -50,7 +52,9 @@
         "goneweek": 1,
         "featured": true,
         "featured_num": 3,
-        "intro_order": 11
+        "intro_order": 11,
+        "hometown_pop_2010": 28996,
+        "hometown_pop_2013": 28939
     },
     {
         "hair_wavy": "straight",
@@ -75,7 +79,9 @@
         "hometown_state": " IL",
         "ethnicity": "african-american",
         "goneweek": 3,
-        "intro_order": 9
+        "intro_order": 9,
+        "hometown_pop_2010": 2698000,
+        "hometown_pop_2013": 2719000
     },
     {
         "hair_wavy": "straight-medium",
@@ -98,7 +104,9 @@
         "hometown_state": " NJ",
         "ethnicity": "caucasian",
         "name": "Ashley Iaconetti",
-        "intro_order": 5
+        "intro_order": 5,
+        "hometown_pop_2010": 54717,
+        "hometown_pop_2013": 55040
     },
     {
         "hair_wavy": "straight-medium",
@@ -123,7 +131,9 @@
         "hometown_state": " CA",
         "ethnicity": "caucasian",
         "name": "Becca Tilley",
-        "intro_order": 19
+        "intro_order": 19,
+        "hometown_pop_2010": 1306000,
+        "hometown_pop_2013": 1356000
     },
     {
         "hair_wavy": "medium",
@@ -150,7 +160,9 @@
         "hometown_state": " CA",
         "ethnicity": "caucasian",
         "goneweek": 1,
-        "intro_order": 27
+        "intro_order": 27,
+        "hometown_pop_2010": 13059,
+        "hometown_pop_2013": 13532
     },
     {
         "hair_wavy": "straight",
@@ -177,7 +189,9 @@
         "name": "Britt Nilsson",
         "featured": true,
         "featured_num": 1,
-        "intro_order": 1
+        "intro_order": 1,
+        "hometown_pop_2010": 3796000,
+        "hometown_pop_2013": 3884000
     },
     {
         "hair_wavy": "medium",
@@ -203,7 +217,9 @@
         "hometown_state": " FL",
         "ethnicity": "caucasian",
         "goneweek": 1,
-        "intro_order": 24
+        "intro_order": 24,
+        "hometown_pop_2010": 239425,
+        "hometown_pop_2013": 255483
     },
     {
         "hair_wavy": "straight-medium",
@@ -228,7 +244,9 @@
         "hometown_state": " TX",
         "ethnicity": "caucasian",
         "name": "Carly Waddell",
-        "intro_order": 25
+        "intro_order": 25,
+        "hometown_pop_2010": 366303,
+        "hometown_pop_2013": 379577
     },
     {
         "hair_wavy": "medium",
@@ -253,7 +271,9 @@
         "hometown_state": " CA",
         "ethnicity": "caucasian",
         "name": "Jade Roper",
-        "intro_order": 30
+        "intro_order": 30,
+        "hometown_pop_2010": 3796000,
+        "hometown_pop_2013": 3884000
     },
     {
         "hair_wavy": "straight",
@@ -280,7 +300,9 @@
         "name": "Jillian Anderson",
         "featured": true,
         "featured_num": 2,
-        "intro_order": 12
+        "intro_order": 12,
+        "hometown_pop_2010": 604453,
+        "hometown_pop_2013": 649111
     },
     {
         "hair_wavy": "straight",
@@ -331,7 +353,9 @@
         "hometown_state": " OR",
         "ethnicity": "caucasian",
         "name": "Juelia Kinney",
-        "intro_order": 18
+        "intro_order": 18,
+        "hometown_pop_2010": 585256,
+        "hometown_pop_2013": 609456
     },
     {
         "hair_wavy": "medium",
@@ -356,7 +380,9 @@
         "hometown_state": " BC",
         "ethnicity": "caucasian",
         "name": "Kaitlyn Bristowe",
-        "intro_order": 15
+        "intro_order": 15,
+        "hometown_pop_2010": 603502,
+        "hometown_pop_2013": 630056
     },
     {
         "hair_wavy": "straight",
@@ -382,7 +408,9 @@
         "hometown_state": " KY",
         "ethnicity": "caucasian",
         "goneweek": 1,
-        "intro_order": 29
+        "intro_order": 29,
+        "hometown_pop_2010": 836,
+        "hometown_pop_2013": 830
     },
     {
         "hair_wavy": "straight",
@@ -407,7 +435,9 @@
         "hometown_state": " TX",
         "ethnicity": "caucasian",
         "name": "Kelsey Poe",
-        "intro_order": 3
+        "intro_order": 3,
+        "hometown_pop_2010": 815260,
+        "hometown_pop_2013": 885400
     },
     {
         "hair_wavy": "straight-medium",
@@ -435,7 +465,9 @@
         "goneweek": 2,
         "featured": true,
         "featured_num": 6,
-        "intro_order": 28
+        "intro_order": 28,
+        "hometown_pop_2010": 7568000,
+        "hometown_pop_2013": 7686912
     },
     {
         "hair_wavy": "curly-medium",
@@ -461,7 +493,9 @@
         "name": "Mackenzie Deonigi",
         "featured": true,
         "featured_num": 5,
-        "intro_order": 13
+        "intro_order": 13,
+        "hometown_pop_2010": 22811,
+        "hometown_pop_2013": 24804
     },
     {
         "hair_wavy": "straight",
@@ -486,7 +520,9 @@
         "hometown_state": " TN",
         "ethnicity": "caucasian",
         "name": "Megan Bell",
-        "intro_order": 4
+        "intro_order": 4,
+        "hometown_pop_2010": 609644,
+        "hometown_pop_2013": 658602
     },
     {
         "hair_wavy": "straight",
@@ -510,7 +546,9 @@
         "hometown_state": " UT",
         "ethnicity": "caucasian",
         "goneweek": 1,
-        "intro_order": 17
+        "intro_order": 17,
+        "hometown_pop_2010": 112879,
+        "hometown_pop_2013": 116288
     },
     {
         "hair_wavy": "straight-medium",
@@ -536,7 +574,9 @@
         "hometown_state": " AZ",
         "ethnicity": "caucasian",
         "goneweek": 1,
-        "intro_order": 23
+        "intro_order": 23,
+        "hometown_pop_2010": 217558,
+        "hometown_pop_2013": 226918
     },
     {
         "hair_wavy": "straight-medium",
@@ -561,7 +601,9 @@
         "hometown_state": "UNK",
         "ethnicity": "caucasian",
         "name": "Nikki Delventhal",
-        "intro_order": 10
+        "intro_order": 10,
+        "hometown_pop_2010": 8190000,
+        "hometown_pop_2013": 8406000
     },
     {
         "hair_wavy": "straight-medium",
@@ -587,7 +629,9 @@
         "hometown_state": " CA",
         "ethnicity": "caucasian",
         "goneweek": 1,
-        "intro_order": 7
+        "intro_order": 7,
+        "hometown_pop_2010": 3796000,
+        "hometown_pop_2013": 3884000
     },
     {
         "hair_wavy": "straight",
@@ -612,7 +656,9 @@
         "hometown_state": " CA",
         "ethnicity": "caucasian",
         "name": "Samantha Steffen",
-        "intro_order": 20
+        "intro_order": 20,
+        "hometown_pop_2010": 3796000,
+        "hometown_pop_2013": 3884000
     },
     {
         "hair_wavy": "straight-medium",
@@ -638,7 +684,9 @@
         "hometown_state": " UT",
         "ethnicity": "caucasian",
         "goneweek": 2,
-        "intro_order": 16
+        "intro_order": 16,
+        "hometown_pop_2010": 87760,
+        "hometown_pop_2013": 90231
     },
     {
         "hair_wavy": "medium",
@@ -664,7 +712,9 @@
         "hometown_state": " FL",
         "ethnicity": "caucasian",
         "goneweek": 2,
-        "intro_order": 8
+        "intro_order": 8,
+        "hometown_pop_2010": 165893,
+        "hometown_pop_2013": 172389
     },
     {
         "hair_wavy": "straight",
@@ -690,7 +740,9 @@
         "hometown_state": " FL",
         "ethnicity": "caucasian",
         "goneweek": 3,
-        "intro_order": 26
+        "intro_order": 26,
+        "hometown_pop_2010": 56864,
+        "hometown_pop_2013": 60202
     },
     {
         "hair_wavy": "medium",
@@ -716,7 +768,9 @@
         "hometown_state": " CA",
         "ethnicity": "caucasian",
         "goneweek": 3,
-        "intro_order": 6
+        "intro_order": 6,
+        "hometown_pop_2010": 63635,
+        "hometown_pop_2013": 65040
     },
     {
         "hair_wavy": "medium",
@@ -731,7 +785,9 @@
         "name": "Ashley Salter",
         "ethnicity": "caucasian",
         "hair_length": "chest",
-        "intro_order": 14
+        "intro_order": 14,
+        "hometown_pop_2010": 8190000,
+        "hometown_pop_2013": 8406000
     },
     {
         "name": "Whitney Bischoff",
@@ -747,7 +803,9 @@
         "hometown_state": "IL",
         "featured": true,
         "featured_num": 4,
-        "intro_order": 2
+        "intro_order": 2,
+        "hometown_pop_2010": 2698000,
+        "hometown_pop_2013": 2719000
     }
 
 

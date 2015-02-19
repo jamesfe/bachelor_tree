@@ -182,7 +182,7 @@
             "cell phone"
         ],
         "free_text": " If I never had to worry, I would be very happy.  If I never got to step out of my comfort zone, I would be very sad.  If you won the lottery, what would you do with your winnings? Pay off my college loans. Buy my parents whatever they need most, plus a vacation! Save half of the difference and give the other half to charity.  Who is your favorite author? David Foster Wallace or Dave Eggers. Both men have (or had) such a grasp of the human experience and the English language. Great wordsmiths, highly eccentric.  Who do you admire most in the world? People who face danger to promote or defend the things they believe in. That's really living what you talk about.  What is your greatest achievement to date? The children I sponsor are my most proud achievement. I am happy to put my money toward giving them a better life.",
-        "eliminated": false,
+        "eliminated": true,
         "photo_url": "http://static.east.abc.go.com/service/image/ratio/id/e44ce80a-1d49-4d54-bc52-bc2b458ea0a2/dim/690.1x1.jpg",
         "hometown_state": " CA",
         "ethnicity": "asian",
@@ -191,7 +191,8 @@
         "featured_num": 1,
         "intro_order": 1,
         "hometown_pop_2010": 3796000,
-        "hometown_pop_2013": 3884000
+        "hometown_pop_2013": 3884000,
+        "goneweek": 7
     },
     {
         "hair_wavy": "medium",
@@ -239,14 +240,15 @@
             "cut-off denim shorts"
         ],
         "free_text": " I love it when my date is invested, opens the door, asks questions, looks me in the eyes, compliments me, smiles, laughs, holds my hand.  I hate it when my date looks at his phone the whole time, is absent mentally, is too handsy (at first), eats less than me, is rude to other people. What is the most outrageous thing you've ever done? I had to be a pirate watcher from midnight to 4am in the Red Sea on my last ship. (Yes, you read that correct...actual pirates, not Captain Hook.)  Who is your favorite actor? Rachel McAdams -- she's brilliant while being adorable at the same time. Perfect balance.  What's the most romantic present you have ever received? A handpicked flower from his walk to pick me up. Something about a man twirling a flower in his fingers...so sweet and thoughtful.  What does being married mean to you? Two souls growing independently and intertwined at the same time. Unconditional love, trust, companionship and compassion.",
-        "eliminated": false,
+        "eliminated": true,
         "photo_url": "http://static.east.abc.go.com/service/image/ratio/id/ec18c2a8-752e-4499-8553-3cdb8038c35d/dim/690.1x1.jpg",
         "hometown_state": " TX",
         "ethnicity": "caucasian",
         "name": "Carly Waddell",
         "intro_order": 25,
         "hometown_pop_2010": 366303,
-        "hometown_pop_2013": 379577
+        "hometown_pop_2013": 379577,
+        "goneweek": 7
     },
     {
         "hair_wavy": "medium",
@@ -266,14 +268,15 @@
             "books"
         ],
         "free_text": " If I never had to worry about debt, I would be very happy.  If I never got to go outside, I would be very sad.  What is your greatest achievement to date? Moving to Los Angeles on my own and starting the launch of my business.  If you could be any animal, what would you be? An elephant. They are associated with wisdom and altruism. They are large in scale yet graceful. I love the matriarchy as well.  If you could be a fictional character, who would you be? Jane Eyre. She's admirable, a heroine that relies on herself to get back on her feet. She's complex and passionate.  If you won the lottery, what would you do with your winnings? Launch my business, pay off my debt, set my parents up for retirement, invest, and give back.",
-        "eliminated": false,
+        "eliminated": true,
         "photo_url": "http://static.east.abc.go.com/service/image/ratio/id/13f27ffe-55ec-4642-8066-9513ac3d3a0e/dim/690.1x1.jpg",
         "hometown_state": " CA",
         "ethnicity": "caucasian",
         "name": "Jade Roper",
         "intro_order": 30,
         "hometown_pop_2010": 3796000,
-        "hometown_pop_2013": 3884000
+        "hometown_pop_2013": 3884000,
+        "goneweek": 8
     },
     {
         "hair_wavy": "straight",

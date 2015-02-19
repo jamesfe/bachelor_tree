@@ -8,7 +8,7 @@ from collections import OrderedDict
 import random
 from operator import itemgetter
 
-MAXWEEK = 6
+MAXWEEK = 8
 
 
 def textvals_to_numbers(in_vals):
@@ -42,7 +42,7 @@ def textvals_to_numbers(in_vals):
         feat_num = in_vals['featured_num']
     except KeyError:
         feat_num = -999
-    
+
     ret_data = OrderedDict({"ethnicity": ethnicity[in_vals['ethnicity']],
                             "hair_color": hair_color[in_vals['hair_color']],
                             "hair_length": hair_length[in_vals['hair_length']],

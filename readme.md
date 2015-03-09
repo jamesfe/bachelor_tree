@@ -7,6 +7,9 @@ BachelorTree is a silly project.  My girlfriend really seems to like watching AB
   - Why do some girls go?
   - Who will go next?  *(Boo!  Hiss!!  Predictive analysis!!!)*
 
+### More explanation
+http://blog.thehumangeo.com/2015/02/20/machine-learning-about-love-who-will-leave-the-bachelor-next/
+
 ### Concept
 
 1. We write some sort of data scraper.

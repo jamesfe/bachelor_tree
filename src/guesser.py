@@ -1,8 +1,10 @@
+# coding: utf-8
 """
 We can only really call this a guesser.  Let's categorize some contestants.
 """
+from __future__ import (absolute_import, division, print_function, unicode_literals)
 
-from sklearn import tree, svm
+from sklearn import svm
 import json
 from collections import OrderedDict
 import random
@@ -118,15 +120,15 @@ def week_predict(tgt_data, elims, tgt_week, sc_learn):
     return ret_val
 
 if __name__ == "__main__":
-    ELIMS = json.load(file('../feature_data/eliminations.json', 'r'))
-    TGT_FILE = json.load(file("../feature_data/contestants.json", 'r'))
+    ELIMS = json.load(open('../feature_data/eliminations.json', 'r'))
+    TGT_FILE = json.load(open("../feature_data/contestants.json", 'r'))
 
     # learner = tree.DecisionTreeClassifier()
     learner = svm.SVC()
 
     dt = dict()
 
-    tot_att = 10000
+    tot_att = 100
     departure_count = dict()
     for att in range(0, tot_att):
         accs = list()

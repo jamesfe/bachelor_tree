@@ -1,6 +1,8 @@
+# coding: utf-8
 """
 A data gathering workflow for The Bachelor
 """
+from __future__ import (absolute_import, division, print_function, unicode_literals)
 
 from bs4 import BeautifulSoup
 import requests
@@ -53,7 +55,7 @@ def pickle_indiv_pages(url, ofile):
     in_dat = browser.page_source
     write_dict = dict({"url": url,
                        "content": in_dat})
-    opickle = file(ofile, 'w')
+    opickle = open(ofile, 'wb')
     pickle.dump(write_dict, opickle)
     opickle.close()
     browser.quit()
@@ -66,9 +68,8 @@ def individual_extract(pfile_name):
     :return:
     """
 
-    pfile = file(pfile_name, 'r')
-    in_dat = pickle.load(pfile)
-    pfile.close()
+    with open(pfile_name, 'rb') as ofile:
+        in_dat = pickle.load(ofile)
 
     ret_vals = dict()
 
@@ -177,7 +178,7 @@ def parse_image_data_file(in_fname):
     :param in_fname:
     :return:
     """
-    in_file = file(in_fname, 'r')
+    in_file = open(in_fname, 'r')
 
     ret_vals = dict()
     c_val = None
@@ -215,7 +216,7 @@ def scrape_to_json(f_out):
 
     print(hl_set)
 
-    json_out = file(f_out, 'w')
+    json_out = open(f_out, 'w')
     json_out.write(json.dumps(final_data, indent=4, separators=(',', ': ')))
     json_out.close()
 

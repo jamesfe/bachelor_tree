@@ -150,9 +150,9 @@ def gather_all_pages():
     """
     links = get_main_links()
     for index, link in enumerate(links):
-        print link, index
+        print(link, index)
         newfile = join(PICKLEDIR, str(index) + ".pickle")
-        print newfile
+        print(newfile)
         pickle_indiv_pages(link, newfile)
 
 
@@ -163,7 +163,7 @@ def download_images(in_dat_dict):
     :return:
     """
     for index, item in enumerate(in_dat_dict):
-        print item['photo_url']
+        print(item['photo_url'])
         req = requests.get(item['photo_url'], stream=True)
         fname = join(IMAGEDIR, str(index) + "_img.png")
         with open(fname, 'wb') as stream_file:
@@ -210,10 +210,10 @@ def scrape_to_json(f_out):
 
     final_data = list()
     for i in range(0, len(joiners)):
-        final_data.append(dict(joiners[i].items() + contestant_data[i].items()))
+        final_data.append(dict(list(joiners[i].items()) + list(contestant_data[i].items())))
         hl_set.add(joiners[i]['ethnicity'])
 
-    print hl_set
+    print(hl_set)
 
     json_out = file(f_out, 'w')
     json_out.write(json.dumps(final_data, indent=4, separators=(',', ': ')))

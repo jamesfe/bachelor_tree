@@ -8,7 +8,7 @@ from collections import OrderedDict
 import random
 from operator import itemgetter
 
-MAXWEEK = 8
+MAXWEEK = 9
 
 
 def textvals_to_numbers(in_vals):
@@ -70,7 +70,7 @@ def data_formatter(in_json, eliminations, tgt_week):
             if indiv['name'] in eliminations[k]:
                 elim = 1
         in_vals = textvals_to_numbers(indiv)
-        num_vals[indiv['name']] = [in_vals.values(), elim]
+        num_vals[indiv['name']] = [list(in_vals.values()), elim]
 
     return num_vals
 
@@ -91,7 +91,7 @@ def week_predict(tgt_data, elims, tgt_week, sc_learn):
     samples = set()
     while len(samples) < (len(learn_values) * 0.25):
         samples.add(random.randint(0, len(learn_values) - 1))
-    learn_arr = learn_values.values()
+    learn_arr = list(learn_values.values())
     # print "Sample selection: ", samples
     for index in samples:
         x.append(learn_arr[index][0])
@@ -126,7 +126,7 @@ if __name__ == "__main__":
 
     dt = dict()
 
-    tot_att = 5000
+    tot_att = 10000
     departure_count = dict()
     for att in range(0, tot_att):
         accs = list()
@@ -156,8 +156,8 @@ if __name__ == "__main__":
     #     fp.write("\n")
     # fp.close()
 
-    print sum(accs) / len(accs)
-    dc = sorted(zip(departure_count.keys(), departure_count.values()), key=itemgetter(1), reverse=True)
+    print(sum(accs) / len(accs))
+    dc = sorted(zip(list(departure_count.keys()), list(departure_count.values())), key=itemgetter(1), reverse=True)
 
     for i in dc:
-        print "Departing: ", i[0] + ": ", i[1]
+        print("Departing: ", i[0] + ": ", i[1])
